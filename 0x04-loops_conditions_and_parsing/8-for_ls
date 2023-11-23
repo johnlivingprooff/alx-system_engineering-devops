@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # removes "0-" from the start of a filename
 
-
-for file in *; do
-    echo "${file#[0-9]*-}"
+files=$(ls)
+for file in $files; do
+    echo "$file" | cut -d '-' -f2
 done
