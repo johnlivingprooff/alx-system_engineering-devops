@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# FizzBuzz with bash script
 
 while ((num++<100)); do
     if [ $((num % 5)) == 0 ] && [ $((num % 3)) == 0 ]; then

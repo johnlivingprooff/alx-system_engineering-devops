@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# check if school exists, and is a regular file with content
 
 file="school"
 if [ -e "$file" ]; then

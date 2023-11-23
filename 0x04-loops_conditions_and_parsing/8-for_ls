@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# removes "0-" from the start of a filename
 
 files=$(ls)
 for file in $files; do
