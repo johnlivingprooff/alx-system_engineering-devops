@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-files=$(ls)
-for file in $files; do
+for file in $(ls); do
     echo "$file" | sed 's/^[0-9]*-//g' 
 done
