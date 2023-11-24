@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# displays its own PID
+
+ps ax | grep $0 | awk '{print $1}' | head -n 1
