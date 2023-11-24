@@ -1,1 +1,11 @@
 #!/usr/bin/env bash
+# script that stops 4-to_infinity_and_beyond process.
+
+
+executable_name="4-to_infinity_and_beyond"
+process_name=$(pgrep -l -x "$executable_name" | awk '{print $2}')
+
+if [ -n "$process_name" ]; then
+    pkill -KILL "$process_name"
+fi
+
