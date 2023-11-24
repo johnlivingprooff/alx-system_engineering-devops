@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
-# displays the PID, along with the process name, of processes whose name contain the word bash.
+# script that kills the process 7-highlander.
 
-pgrep -l bash
+pid=$(pgrep -f 7-highlander)
+kill -9 $pid
