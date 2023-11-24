@@ -2,4 +2,4 @@
 # script that kills the process 7-highlander.
 
 pid=$(pgrep -f 7-highlander)
-kill -9 $pid
+kill -9 "$pid"
