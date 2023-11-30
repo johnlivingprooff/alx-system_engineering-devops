@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 # Define a regular expression to extract relevant information
-puts ARGV[0].scan(/from:(?<sender>[\w\s]+)\s\[to:(?<receiver>\+\d+)\]\s\[flags:(?<flags>[-\d:]+)\]\s\[msg:(?<msg_id>\d+):(?<message>[^\]]+)\]/).join
+puts ARGV[0].scan(/(?<=from:|to:|flags:)(\+?\w+|[-?[0-1]:?]+)/).join(',')
