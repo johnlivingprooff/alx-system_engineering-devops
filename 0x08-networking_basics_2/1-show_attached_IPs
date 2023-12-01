@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 # Displays the configured IP addresses
 
-ip addr | grep -o "inet [0-9]*\.[0-9]*\.[0-9]*\.[0-9]*" | grep -o "[0-9]*\.[0-9]*\.[0-9]*\.[0-9]*"
+ifconfig | grep "inet" | cut -d ' ' -f 10
