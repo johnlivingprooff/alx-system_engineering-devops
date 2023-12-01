@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-# I forgot to write these coments, so I failed the first deadline
+# listens on port 98, on any host
 
 nc -lp 98
