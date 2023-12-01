@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 # This adds localhost & facebook.com to files /etc/hosts
 
-echo "127.0.0.1 localhost" >> /etc/hosts
-echo "8.8.8.8 facebook.com" >> /etc/hosts
+cp /etc/hosts ~/hosts.new
+echo "127.0.0.1 localhost" >> ~/hosts.new
+echo "8.8.8.8 facebook.com" >> ~/hosts.new
+cat ~/hosts.new /etc/hosts
