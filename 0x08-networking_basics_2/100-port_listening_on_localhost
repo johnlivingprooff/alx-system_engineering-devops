@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+# I forgot to write these coments, so I failed the first deadline
 
 nc -lp 98

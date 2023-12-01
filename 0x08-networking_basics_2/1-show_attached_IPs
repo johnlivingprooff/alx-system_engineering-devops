@@ -1,3 +1,4 @@
 #!/usr/bin/env bash
+# Displays the configured IP addresses
 
 ifconfig -a | grep -oP '(?<=inet\s)\d+(\.\d+){3}'
