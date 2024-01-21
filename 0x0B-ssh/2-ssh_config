@@ -1,0 +1,5 @@
+Host 52.91.149.221
+    PasswordAuthentication no
+    PubkeyAuthentication yes
+    IdentityFile ~/.ssh/school
+    ServerAliveInterval 60
