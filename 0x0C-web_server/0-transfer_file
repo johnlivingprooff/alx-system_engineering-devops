@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# transfers a file from our client to a server:
+
+# check if less than 3 args is passed
+if [ "$#" -lt 4 ]; then
+    echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    exit 1
+fi
+
+path=$1
+ip=$2
+user=$3
+key=$4
+
+# copies the files from local to remote
+scp -o StrictHostKeyChecking=no -i "$key" "$path" "$user@$ip:~/"
