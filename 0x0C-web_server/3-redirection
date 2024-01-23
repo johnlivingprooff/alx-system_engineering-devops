@@ -31,4 +31,4 @@ server {
 echo "$server" > /etc/nginx/sites-available/default
 
 # reload server
-nginx -s reload
+sudo nginx -s reload

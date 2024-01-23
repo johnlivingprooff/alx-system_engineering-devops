@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+# configure nginx web server on another ubuntu
+
+# update the OS
+sudo apt-get -y update
+
+# install nginx
+sudo apt-get -y install nginx
+
+# add html to index in www/html dir
+echo "Hello World!" | sudo tee /var/www/html/index.html
+
+# configure the server, with redirect settings
+server="
+server {
+    listen 80 default_server;
+    listen [::]:80 default_server;
+
+    root /var/www/html;
+    index index.html index.htm;
+
+    server_name _;
+
+    location /redirect_me {
+        return 301 https://google.com/; # Change the URL to your desired destination
+    }
+
+    error_page 404 /404.html;
+    location = /404.html {
+        internal;
+    }
+}
+"
+
+# add configured redirect
+echo "$server" > /etc/nginx/sites-available/default
+
+# reload server
+sudo nginx -s reload
