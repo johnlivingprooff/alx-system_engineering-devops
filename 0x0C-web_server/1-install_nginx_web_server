@@ -2,13 +2,10 @@
 #  Install nginx web server
 
 # update the OS
-apt-get update
+apt-get update -y
 
 # install nginx
 apt-get install nginx -y
 
 # add html to index in www/html dir
 echo "Hello World!" | tee /var/www/html/index.html > /dev/null
-
-# reload nginx server
-nginx -s reload
