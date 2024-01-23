@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
-#  Install nginx web server
+# Install nginx web server
 
 # update the OS
-apt-get update -y
+sudo apt-get -y update
 
 # install nginx
-apt-get install nginx -y
+sudo apt-get -y install nginx
 
 # add html to index in www/html dir
-echo "Hello World!" | tee /var/www/html/index.html > /dev/null
+echo "Hello World!" | sudo tee /var/www/html/index.html
