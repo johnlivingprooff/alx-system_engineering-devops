@@ -6,25 +6,27 @@ sudo apt-get update -y
 sudo apt upgrade -y
 
 # install haproxy2.8-stable(LTS)
-sudo apt-get install --no-install-recommends software-properties-common
-echo | sudo add-apt-repository ppa:vbernat/haproxy-2.8
-sudo apt-get install haproxy=2.8.\* -y
+# sudo apt-get install --no-install-recommends software-properties-common
+# echo | sudo add-apt-repository ppa:vbernat/haproxy-2.8
+sudo apt-get install haproxy -y
 
 # configuring HAproxy
 config="
-frontend http_front
+frontend www
 \\tbind *:80
-\\tdefault_backend http_back
+\\tdefault_backend servers
 
-backend http_back
+backend servers
 \\tbalance roundrobin
 \\tserver web_server_1 100.25.162.17:80 check
 \\tserver web_server_2 100.25.131.228:80 check
 "
 haproxy_cfg="/etc/haproxy/haproxy.cfg"
 
-# append configurations to cfg file
+# append configurations
+echo "ENABLED=1" | sudo tee -a /etc/default/haproxy
+echo "CONFIG=/etc/haproxy/haproxy.cfg" | sudo tee -a /etc/default/haproxy
 echo "$config" | sudo tee -a "$haproxy_cfg"
 
 # restart the haproxy
-sudo systemctl restart haproxy
+sudo service haproxy restart

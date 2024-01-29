@@ -9,9 +9,10 @@ sudo apt-get -y install nginx
 
 # add html to index in www/html dir
 echo "Hello World!" | sudo tee /var/www/html/index.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/err_404.html
 
 # configure the server, with redirect settings
-server="
+server_config="
 server {
     listen 80 default_server;
     listen [::]:80 default_server;
@@ -33,8 +34,7 @@ server {
 "
 
 # add configured redirect
-sudo su
-echo "$server" > /etc/nginx/sites-available/default
+echo "$server_config" | sudo tee /etc/nginx/sites-available/default
 
 # reload server
-nginx -s reload
+sudo service nginx restart

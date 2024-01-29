@@ -32,4 +32,4 @@ sudo su
 echo "$server" > /etc/nginx/sites-available/default
 
 # reload server
-nginx -s reload
+sudo service nginx restart
