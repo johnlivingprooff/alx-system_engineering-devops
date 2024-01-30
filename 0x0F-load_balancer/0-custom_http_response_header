@@ -14,24 +14,28 @@ echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 # configure the server, with redirect settings
 server_config="
 server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
+        listen 80 default_server;
+        listen [::]:80 default_server;
 
-    add_header X-Served-By \$hostname;
+        add_header X-Served-By \$hostname;
 
-    root /var/www/html;
-    index index.html index.htm;
+        root /var/www/html;
+        index index.htm index.html index.nginx-debian.html;
 
-    server_name johnlivingprooff.tech;
+        server_name _;
 
-    location /redirect_me {
-        return 301 https://google.com/; # Change the URL to your desired destination
-    }
+        location / {
+                try_files \$uri \$uri/ =404;
+        }
 
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
-    }
+        location /redirect_me {
+            return 301 https://google.com/; # Change the URL to your desired destination
+        }
+
+        error_page 404 /404.html;
+        location = /404.html {
+            internal;
+        }
 }
 "
 

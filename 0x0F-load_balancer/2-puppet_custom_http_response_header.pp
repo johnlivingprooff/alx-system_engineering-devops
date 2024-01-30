@@ -1,18 +1,28 @@
-# configure HTTP response Header
+# Configure HTTP response Header
 
-# Ensure the configuration file exists
-file { '/etc/nginx/sites-available/default':
-  ensure => file,
-  # Set proper ownership and permissions
-  owner  => 'root',
-  group  => 'root',
-  mode   => '0644',
+# Updating OS
+exec { 'update OS':
+  command  => 'sudo apt-get -y update',
+  path     => '/usr/bin',
+  provider => shell,
 }
 
-  # Configure the HTTP response header
-  exec { 'Configure Response header':
-    path        => '/usr/bin:/usr/sbin:/bin',
-    command     => 'sed -i "/location \/ {/a \\        \\tadd_header X-Served-By \$hostname;" /etc/nginx/sites-available/default',
-    refreshonly => true,
-    subscribe   => File[/etc/nginx/sites-available/default],
-  }
+# Installing NGINX
+package { 'nginx':
+  ensure => installed,
+}
+
+# Adding header and other configurations
+exec { 'header X-Served-by':
+  command  => 'sudo sed -i "/listen 80 default_server;/a\\       add_header X-Served-By $hostname;
+  " /etc/nginx/sites-available/default',
+  provider => shell,
+  require  => Package['nginx'], # Ensure NGINX is installed before applying the configuration
+}
+
+# Ensure NGINX service is running and enable it at boot
+service { 'nginx':
+  ensure    => running,
+  enable    => true,
+  subscribe => File['/etc/nginx/sites-available/default'], # Restart NGINX when configuration changes
+}
