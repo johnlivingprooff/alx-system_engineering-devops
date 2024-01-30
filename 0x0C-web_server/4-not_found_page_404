@@ -9,7 +9,7 @@ sudo apt-get -y install nginx
 
 # add html to index in www/html dir
 echo "Hello World!" | sudo tee /var/www/html/index.html
-echo "Ceci n'est pas une page" | sudo tee /var/www/html/err_404.html
+echo "Ceci n'est pas une page" | sudo tee /var/www/html/404.html
 
 # configure the server, with redirect settings
 server_config="
