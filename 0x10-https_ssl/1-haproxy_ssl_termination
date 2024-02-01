@@ -8,10 +8,6 @@ global
         group haproxy
         daemon
 
-        # ssl configuration
-        maxconn 2048
-        tune.ssl.default-dh-param 2048
-
         # Default SSL material locations
         ca-base /etc/ssl/certs
         crt-base /etc/ssl/private
@@ -37,20 +33,13 @@ defaults
         errorfile 503 /etc/haproxy/errors/503.http
         errorfile 504 /etc/haproxy/errors/504.http
 
-frontend http_front
+frontend web-front
         bind *:80
-        reqadd X-Forwarded-Proto:\ http
-        default_backend servers
-
-frontend https_front
-        bind *:443 ssl crt /etc/ssl/certs/www.yourdomain.com.pem
-        reqadd X-Forwarded-Proto:\ https
+        bind *:443 ssl crt /certs/johnlivingprooff.tech.pem
         http-request redirect scheme https unless { ssl_fc }
-        default_backend servers
+        default_backend web-back
 
-
-backend servers
+backend web-back
         balance roundrobin
-        redirect scheme https if !{ ssl_fc }
-        server web_server_1 100.25.162.17:80 check
-        server web_server_2 100.25.131.228:80 check
+        server web-01 100.25.162.17:80 check
+        server web-02 100.25.131.228:80 check
