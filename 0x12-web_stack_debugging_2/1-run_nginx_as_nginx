@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # ensure to use the nginx user
-
 pkill -f apache2
 sudo chmod 644 /etc/nginx/nginx.conf
 sudo sed -i "s/#user www-data;/user nginx;/" /etc/nginx/nginx.conf
