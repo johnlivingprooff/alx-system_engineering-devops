@@ -3,9 +3,9 @@
 script that, using a REST API,
 for a given employee ID, returns
 information about his/her TODO list progress.
-export data to a csv.
+export data to a json file.
 """
-import csv
+import json
 import requests
 import sys
 
@@ -25,13 +25,18 @@ if __name__ == '__main__':
         f"https://jsonplaceholder.typicode.com/todos?userId={employee_id}")
     todo_data = todo_req.json()
 
-    # write the csv file
-    csv_file = f"{employee_id}.csv"
-    with open(csv_file, mode='w', newline='') as f:
-        do_write = csv.writer(f)
-        for todo in todo_data:
-            do_write.writerow(['"{}","{}","{}","{}"'
-                               .format(employee_id,
-                                       usr_data['username'],
-                                       todo['completed'],
-                                       todo['title'])])
+    # create a employee task list
+    employee_tasks = []
+    for todo in todo_data:
+        if todo['userId'] == int(employee_id):
+            task_info = {
+                'task': todo['title'],
+                'completed': todo['completed'],
+                'username': usr_data['username'],
+            }
+            employee_tasks.append(task_info)
+
+    # write the json file
+    json_file = f"{employee_id}.json"
+    with open(json_file, mode='w') as f:
+        json.dump({employee_id: employee_tasks}, f)
