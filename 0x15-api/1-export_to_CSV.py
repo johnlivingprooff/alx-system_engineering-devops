@@ -5,9 +5,9 @@ for a given employee ID, returns
 information about his/her TODO list progress.
 export data to a csv.
 """
+import csv
 import requests
 import sys
-import csv
 
 
 if __name__ == '__main__':
@@ -34,4 +34,8 @@ if __name__ == '__main__':
     with open(csv_file, mode='w', newline='') as f:
         do_write = csv.writer(f)
         for todo in todo_data:
-            do_write.writerow([employee_id,usr_data['username'],todo['completed'],todo['title']])
+            do_write.writerow(['"{}","{}","{}","{}"'
+                               .format(employee_id,
+                                       usr_data['username'],
+                                       todo['completed'],
+                                       todo['title'])])
