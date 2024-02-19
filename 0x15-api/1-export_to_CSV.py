@@ -28,10 +28,7 @@ if __name__ == '__main__':
     # write the csv file
     csv_file = f"{employee_id}.csv"
     with open(csv_file, mode='w', newline='') as f:
-        do_write = csv.writer(f)
+        do_write = csv.writer(f, quoting=csv.QUOTE_ALL)
         for todo in todo_data:
-            do_write.writerow(['"{}","{}","{}","{}"'
-                               .format(employee_id,
-                                       usr_data['username'],
-                                       todo['completed'],
-                                       todo['title'])])
+            do_write.writerow([employee_id, usr_data['username'],
+                               todo['completed'], todo['title']])
