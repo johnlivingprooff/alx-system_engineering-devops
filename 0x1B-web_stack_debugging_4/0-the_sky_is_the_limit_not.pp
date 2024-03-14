@@ -1,7 +1,7 @@
 # fix high volume requests
 
 exec { 'ulimit_replace':
-  provider => 'shell',
+  provider => shell,
   command  => 'sudo sed -i "s/ULIMIT=\"-n 15\"/ULIMIT=\"-n 4096\"/" /etc/default/nginx',
   before   => Exec['ulimit_reload'],
 }
